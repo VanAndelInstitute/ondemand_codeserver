@@ -1,33 +1,24 @@
-<%-
-  groups = OodSupport::User.new.groups.sort_by(&:id).tap { |groups|
-    groups.unshift(groups.delete(OodSupport::Process.group))
-  }.map(&:name).grep(/^P./)
--%>
 ---
-cluster: "pitzer"
+cluster: "hpc"
 form:
-  - account
   - bc_num_hours
   - working_dir
-  - version
+  - sh_partition
+
 attributes:
-  account:
-    label: "Project"
-    widget: select
-    options:
-      <%- groups.each do |group| %>
-      - "<%= group %>"
-    <%- end %>
-  version:
-    widget: "select"
-    label: "Codeserver Version"
-    options:
-      - ["4.8", "4.8.3"]
-      - ["3.9", "3.9.3"]
 
   working_dir:
     label: "Working Directory"
     data-filepicker: true
     data-target-file-type: dirs  # Valid values are: files, dirs, or both
     readonly: false
-    help: "Select your project directory; defaults to $HOME"
+    help: "Optional: Select a project directory to open; defaults to your /home/user.name if not specified"
+
+  sh_partition:
+    label: "Partition"
+    value: "short"
+    required: true
+    help: "For example: quick short bigmem long, or your private nodes."
+
+  bc_num_hours:
+    label: "Runtime (in hours)"
