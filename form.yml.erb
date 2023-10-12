@@ -1,18 +1,24 @@
 ---
 cluster: "hpc"
 form:
-  - bc_num_hours
   - working_dir
+  - sh_modules
   - sh_partition
+  - bc_num_hours
 
 attributes:
 
+  sh_modules:
+    label: "Additional modules (optional)"
+    help: |
+        <small>Space separated list of additional modules to load</br/>
+
   working_dir:
-    label: "Working Directory"
+    label: "Working Directory (optional)"
     data-filepicker: true
     data-target-file-type: dirs  # Valid values are: files, dirs, or both
     readonly: false
-    help: "Optional: Select a project directory to open; defaults to your /home/user.name if not specified"
+    help: "Specify a project directory to start VS Code in; defaults to your /home/user.name if not specified"
 
   sh_partition:
     label: "Partition"

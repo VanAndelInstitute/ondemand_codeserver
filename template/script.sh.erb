@@ -14,6 +14,12 @@ elsif working_dir.file?
 end
 %>
 
+#load modules
+<%- unless context.sh_modules.blank? -%>
+# Load additional modules (optional)
+module load <%= context.sh_modules %>
+<%- end -%>
+
 CODE_SERVER_DATAROOT="$HOME/.local/share/code-server"
 mkdir -p "$CODE_SERVER_DATAROOT/extensions"
 
